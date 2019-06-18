@@ -1,8 +1,13 @@
 {
 	"name": "colorinspector",
-	"displayName": "ColorInspector",
-	"description": "Launch color inspector with ease inside VSCode",
+	"displayName": "Color Inspector",
+	"description": "Launch a color inspector to pick a color of any pixel on screen, and input the color hex value into current editor.",
+	"publisher":"hereafter2",
+	"author": {"name": "hereafter", "email": "tu.tong@outlook.com", "url": "https://github.com/hereafter/color-inspector-and-palettes/wiki"},
+	"keywords": ["color picker", "eye dropper", "color sniffer", "screen color"],
 	"version": "0.0.1",
+	"icon": "images/icon.png",
+	"preview": true,
 	"engines": {
 		"vscode": "^1.35.0"
 	},
@@ -17,7 +22,14 @@
 		"commands": [
 			{
 				"command": "extension.launch-color-inspector",
-				"title": "Inspect Color"
+				"title": "Inspect Color",
+				"category": "Developer"			
+			}
+		],
+		"keybindings":[
+			{
+				"command": "extension.launch-color-inspector",
+				"key": "ctrl+f12"
 			}
 		]
 	},
