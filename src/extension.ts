@@ -9,7 +9,8 @@ import * as child_process from 'child_process';
 
 let _context:vscode.ExtensionContext;
 let _statusBarItem:vscode.StatusBarItem;
-
+let _store_link:string="https://www.microsoft.com/store/productId/9N3FM6V2STMN";
+let _isInstalled:boolean|undefined;
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -18,14 +19,6 @@ export async function activate(context: vscode.ExtensionContext) {
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	_context=context;
-	
-	
-	var isInstalled=await isColorInspectorInstalled();
-	if(!isInstalled){
-		vscode.window.showErrorMessage("Please install Color Inspector & Palettes from Microsoft Store");
-	}
-
-	
 	let commandId='extension.launch-color-inspector';
 	let commandToken = vscode.commands.registerCommand(commandId, async() => {
 		// The code you place here will be executed every time your command is executed
@@ -36,17 +29,12 @@ export async function activate(context: vscode.ExtensionContext) {
 	});
 	_context.subscriptions.push(commandToken);
 
-
 	_statusBarItem=vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 48);
 	_statusBarItem.command=commandId;
 	_context.subscriptions.push(_statusBarItem);
 	
-	
 	updateStatusBarItem();
 }
-
-
-
 
 function updateStatusBarItem() {
 
@@ -69,6 +57,21 @@ async function isColorInspectorInstalled() {
 async function launchColorInspector() {
 	
 	//
+	if(_isInstalled===null && _isInstalled!==false)
+	{
+		var isInstalled=await isColorInspectorInstalled();
+		_isInstalled=true;
+
+		if(!isInstalled) {
+			vscode.window.showErrorMessage("Please install Color Inspector & Palettes from Microsoft Store", "Visit Store").then((value)=>{
+			if(value!==undefined){
+				vscode.env.openExternal(vscode.Uri.parse(_store_link));
+			}
+		});		
+		return;
+	}
+	}
+
 	var folder=_context.globalStoragePath;
 
 	try{

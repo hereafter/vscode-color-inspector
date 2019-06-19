@@ -26,6 +26,14 @@
 				"category": "Developer"			
 			}
 		],
+		"menus":{
+			"editor/context": [
+				{
+					"command": "extension.launch-color-inspector",
+					"group": "9_cutcopypaste"
+				}
+			]	
+		},
 		"keybindings":[
 			{
 				"command": "extension.launch-color-inspector",
