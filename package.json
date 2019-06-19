@@ -15,7 +15,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.launch-color-inspector"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
